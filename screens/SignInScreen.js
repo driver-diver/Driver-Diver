@@ -1,143 +1,116 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Button, Alert } from 'react-native';
-import { Constants, Google } from 'expo';
+import { Text, StatusBar, TextInput, View, StyleSheet } from 'react-native';
+import { Constants } from 'expo';
 import * as firebase from 'firebase';
 
-var firebaseConfig = {
-    apiKey: "AIzaSyDeiWJyPBzim_yMDUo-csLkwfblVt6dAWE",
-    authDomain: "alset-snack.firebaseapp.com",
-    databaseURL: "https://alset-snack.firebaseio.com",
-    projectId: "alset-snack",
-    storageBucket: "alset-snack.appspot.com",
-    messagingSenderId: "873097287154"
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyASbOPwnQvRs-B3dCBx-yomcqixuCBRoZQ",
+    authDomain: "driver-diver.firebaseapp.com",
+    databaseURL: "https://driver-diver.firebaseio.com",
+    projectId: "driver-diver",
+    storageBucket: "driver-diver.appspot.com",
+    messagingSenderId: "954443209968"
 };
+firebase.initializeApp(config);
 
-// Ensure that you do not login twice.
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
-
-function storeHighScore(userId, score) {
-    firebase.database().ref('users/' + userId).set({
-        highscore: score
-    });
-}
-
-function setupHighscoreListener(userId) {
-    firebase.database().ref('users/' + userId).on('value', (snapshot) => {
-        const highscore = snapshot.val().highscore;
-        console.log("New high score: " + highscore);
-    });
-}
-
-function setUserLocation(location){
-    firebase.database.ref('users/' + userId).on('value', (snapshot) => {
-        const location = snapshot.val().location;
-        console.log("Location: " + location);
-    });
-}
-
-// Listen for authentication state to change.
-firebase.auth().onAuthStateChanged((user) => {
-    if (user != null) {
-        console.log("We are authenticated now!");
-    } else {
-        console.log("We did not authenticate.")
-    }
-
-    // Do other things
+/*
+firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
 });
 
+firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+});
+*/
 export default class App extends Component {
-    _handleGoogleLogin = async () => {
-        try {
-            const { type, user,idToken, accessToken } = await Google.logInAsync({
-                androidStandaloneAppClientId: '<ANDROID_CLIENT_ID>',
-                iosStandaloneAppClientId: '<IOS_CLIENT_ID>',
-                androidClientId: '603386649315-9rbv8vmv2vvftetfbvlrbufcps1fajqf.apps.googleusercontent.com',
-                iosClientId: '603386649315-vp4revvrcgrcjme51ebuhbkbspl048l9.apps.googleusercontent.com',
-                scopes: ['profile', 'email']
-            });
-
-            switch (type) {
-                case 'success': {
-                    Alert.alert(
-                        'Logged in!',
-                        `Hi ${user.name}!`,
-                    );
-                    console.log(user);
-                    console.log(type);
-                    console.log(idToken);
-                    console.log(accessToken);
-
-                    const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
-
-                    /* This next code fails with this error message:
-                      Invalid Idp Response: the Google id_token is not allowed to be used with this application. Its audience (OAuth 2.0 client ID) is 603386649315-vp4revvrcgrcjme51ebuhbkbspl048l9.apps.googleusercontent.com, which is not authorized to be used in the project with project_number: 873097287154.
-                    */
-                    firebase.auth().signInWithCredential(credential).catch((error) => {
-                        // Handle Errors here.
-                        console.log("Error authenticating with Google");
-                        console.log(error);
-                        console.log(error.message);
-                    });
-
-                    break;
-                }
-                case 'cancel': {
-                    Alert.alert(
-                        'Cancelled!',
-                        'Login was cancelled!',
-                    );
-                    break;
-                }
-                default: {
-                    Alert.alert(
-                        'Oops!',
-                        'Login failed!',
-                    );
-                }
-            }
-        } catch (e) {
-            Alert.alert(
-                'Oops!',
-                'Login failed!',
-            );
-        }
+    state = {
+        email: '',
+        password: '',
     };
-
-
 
     render() {
         return (
             <View style={styles.container}>
-
-                <Button
-                    title="Login with Google"
-                    onPress={this._handleGoogleLogin}
+                <StatusBar barStyle="light-content" />
+                <View style={styles.header}>
+                    <Text style={styles.description}>
+                        This demo shows how using available TextInput customizations can make
+                        forms much easier to use. Try completing the form and notice that different
+                        fields have specific optimizations and the return key changes from focusing
+                        next input to submitting the form.
+                    </Text>
+                </View>
+                <TextInput
+                    style={styles.input}
+                    value={this.state.email}
+                    onChangeText={email => this.setState({email})}
+                    ref={ref => {this._emailInput = ref}}
+                    placeholder="email@example.com"
+                    autoFocus={true}
+                    autoCapitalize="words"
+                    autoCorrect={true}
+                    keyboardType="email-address"
+                    returnKeyType="next"
+                    onSubmitEditing={this._next}
+                    blurOnSubmit={false}
                 />
-
-                <Text style={styles.paragraph}>
-                    How do we authorize Firebase login after we have our Google idToken and accessToken?
-                </Text>
+                <TextInput
+                    style={styles.input}
+                    value={this.state.password}
+                    onChangeText={password => this.setState({password})}
+                    ref={ref => {this._passwordInput = ref}}
+                    placeholder="Password"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="default"
+                    returnKeyType="send"
+                    onSubmitEditing={this._submit}
+                    blurOnSubmit={true}
+                />
             </View>
         );
     }
+
+    _next = () => {
+        this._passwordInput && this._passwordInput.focus();
+    };
+
+    _submit = () => {
+        alert(`Welcome! Confirmation email has been sent to ${this.state.email}`);
+        const { navigate } = this.props.navigation;
+        navigate('Routes');
+    };
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: Constants.statusBarHeight,
         backgroundColor: '#ecf0f1',
     },
-    paragraph: {
-        margin: 24,
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#34495e',
+    header: {
+        paddingTop: 20 + Constants.statusBarHeight,
+        padding: 20,
+        backgroundColor: '#336699',
+    },
+    description: {
+        fontSize: 14,
+        color: 'white',
+    },
+    input: {
+        margin: 20,
+        marginBottom: 0,
+        height: 34,
+        paddingHorizontal: 10,
+        borderRadius: 4,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        fontSize: 16,
     },
 });

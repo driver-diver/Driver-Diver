@@ -47,6 +47,13 @@ export default class HomeScreen extends React.Component {
         }
       />
 
+            <Button
+                title="Sign Up"
+                onPress={() =>
+                    navigate('SignIn')
+                }
+            />
+
           </View>
         </ScrollView>
 

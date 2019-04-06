@@ -16,6 +16,7 @@ const SignInStack = createStackNavigator({
 
 SignInStack.navigationOptions = {
     tabBarLabel: 'SignIn',
+    pools: 'RoutesScreen'
 };
 
 const MapStack = createStackNavigator({
@@ -91,7 +92,8 @@ RoutesStack.navigationOptions = {
 
 
 export default createBottomTabNavigator({
-  HomeStack,
+    Home: { screen: HomeStack, navigationOptions:{tabBarVisible: false} },
+  //HomeStack,
   RoutesStack,
   LinksStack,
   SettingsStack,
