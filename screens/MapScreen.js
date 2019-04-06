@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, Text, View, StyleSheet } from 'react-native';
-import { Constants, Location, Permissions, MapView } from 'expo';
+import { Constants, Location, Permissions, MapView, Marker } from 'expo';
 
 export default class App extends React.Component {
     static navigationOptions = {
@@ -46,6 +46,13 @@ export default class App extends React.Component {
     }
 
     render() {
+
+        const points = [
+            {latitude: 38.476245, longitude: -122.711245, title: "Person A", description: "Needs a ride"},
+            {latitude: 38.484449, longitude: -122.720893, title: "Person B", description: "Is giving a ride"},
+            {latitude: 38.484576, longitude: -122.699887, title: "Person C", description: "Needs a ride"},
+        ]
+
         return (
             <MapView
                 style={{ flex: 1 }}
@@ -62,7 +69,20 @@ export default class App extends React.Component {
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
-            />
+            >
+                {points.map((point, key) => {
+                    return (
+                    <MapView.Marker 
+                    key={key}
+                    coordinate={{
+                        latitude: point.latitude, 
+                        longitude: point.longitude
+                    }}
+                    title={point.title}
+                    description={point.description} />
+                    );
+                })}
+            </MapView>
 
         );
     }
