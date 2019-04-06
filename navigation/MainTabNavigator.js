@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import RoutesScreen from '../screens/RoutesScreen'
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -53,8 +54,26 @@ SettingsStack.navigationOptions = {
   ),
 };
 
+const RoutesStack = createStackNavigator({
+  Settings: RoutesScreen,
+});
+
+RoutesStack.navigationOptions = {
+  tabBarLabel: 'Pools',
+  tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+          focused={focused}
+          name={Platform.OS === 'ios' ? 'ios-options' : 'md-car'}
+      />
+  ),
+};
+
+
+
+
 export default createBottomTabNavigator({
   HomeStack,
+  RoutesStack,
   LinksStack,
   SettingsStack,
 });
