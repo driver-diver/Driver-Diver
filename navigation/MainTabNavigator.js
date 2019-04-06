@@ -9,6 +9,16 @@ import SettingsScreen from '../screens/SettingsScreen';
 import RoutesScreen from '../screens/RoutesScreen';
 import MapScreen from '../screens/MapScreen';
 import AddPoolsScreen from '../screens/AddPoolsScreen';
+import SignInScreen from '../screens/SignInScreen';
+
+const SignInStack = createStackNavigator({
+    SignIn: SignInScreen,
+});
+
+SignInStack.navigationOptions = {
+    tabBarLabel: 'SignIn',
+    pools: 'RoutesScreen'
+};
 
 const MapStack = createStackNavigator({
     Maps: MapScreen,
@@ -35,7 +45,7 @@ MapStack.navigationOptions = {
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Links: LinksScreen
+  SignIn: SignInScreen
 });
 
 HomeStack.navigationOptions = {
@@ -84,8 +94,10 @@ SettingsStack.navigationOptions = {
         inactiveTintColor: '#f8ffa5'},
 };
 
-const PoolStack = createStackNavigator({
-  Pools: RoutesScreen,
+
+const RoutesStack = createStackNavigator({
+  Routes: RoutesScreen,
+  Maps: MapScreen,
 });
 
 PoolStack.navigationOptions = {
@@ -125,9 +137,11 @@ AddPoolStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
+    Home: { screen: HomeStack, navigationOptions:{tabBarVisible: false} },
   PoolStack,
   AddPoolStack,
+  RoutesStack,
+  LinksStack,
   SettingsStack,
     MapStack
 });
