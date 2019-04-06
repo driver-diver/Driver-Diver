@@ -11,14 +11,14 @@ import {
   AppRegistry,
   Button
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 import { WebBrowser } from 'expo';
 
-import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'Welcome to Driver-Diver!',
+    headerStyle: {backgroundColor: '#00609c'},
+    headerTitleStyle: {color: '#f8ffa5'},
   };
 
   render() {
@@ -43,9 +43,16 @@ export default class HomeScreen extends React.Component {
             <Button
         title="Sign In"
         onPress={() =>
-          navigate('Links')
+          navigate('SignIn')
         }
       />
+
+            <Button
+                title="Sign Up"
+                onPress={() =>
+                    navigate('SignIn')
+                }
+            />
 
           </View>
         </ScrollView>
@@ -91,7 +98,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#c7e7f1'
   },
   developmentModeText: {
     marginBottom: 20,

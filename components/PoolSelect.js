@@ -14,24 +14,25 @@ class PoolSelect extends React.Component {
         super(props);
         this.state = {
             poolList: [
-                {id: 0, name: "Work"},
-                {id: 1, name: "Home"},
-                {id: 2, name: "Gym"}
+                {id: 0, name: "Work", latitude: 38.481456, longitude: -122.710475},
+                {id: 1, name: "Home", latitude: 38.339992, longitude: -122.674369},
+                {id: 2, name: "Gym", latitude: 38.346659, longitude: -122.711001}
             ]
         }
     }
     
     onItemSelect() {
-        /*Build this out*/
+        navigate('Maps');
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Text style={styles.poolTitle}>Select your pool</Text>
                 {this.state.poolList.map((item) => {
                     return(
-                        <TouchableOpacity key={item.id} onPress={this.onItemSelect} style={styles.item}>
+                        <TouchableOpacity key={item.id} onPress={() => navigate('Maps', {latitude: item.latitude, longitude: item.longitude})} style={styles.item}>
                             <Text>{item.name}</Text>
                         </TouchableOpacity>
                     );
