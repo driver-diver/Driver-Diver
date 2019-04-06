@@ -6,7 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import RoutesScreen from '../screens/RoutesScreen';
+import PoolsScreen from '../screens/PoolsScreen';
 import MapScreen from '../screens/MapScreen';
 
 const MapStack = createStackNavigator({
@@ -15,16 +15,21 @@ const MapStack = createStackNavigator({
 
 MapStack.navigationOptions = {
     tabBarLabel: 'Maps',
-    tabBarIcon: ({ focused }) => (
+
+    tabBarIcon: ({ focused, tintColor }) => (
         <TabBarIcon
-            focused={focused}
             name={
                 Platform.OS === 'ios'
                     ? `ios-information-circle${focused ? '' : '-outline'}`
                     : 'md-information-circle'
             }
+            color={tintColor}
         />
     ),
+    tabBarOptions: {style: {backgroundColor: '#00609c'},
+        showLabel: false,
+        activeTintColor: '#F8F8F8',
+        inactiveTintColor: '#f8ffa5'},
 };
 
 const HomeStack = createStackNavigator({
@@ -33,7 +38,12 @@ const HomeStack = createStackNavigator({
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Driver Diver'
+  tabBarLabel: 'Driver Diver',
+    tabBarOptions: {style: {backgroundColor: '#00609c'},
+    showLabel: false,
+        activeTintColor: '#F8F8F8',
+        inactiveTintColor: '#f8ffa5'},
+
 };
 
 const LinksStack = createStackNavigator({
@@ -42,12 +52,17 @@ const LinksStack = createStackNavigator({
 
 LinksStack.navigationOptions = {
   tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
+
+    tabBarIcon: ({ focused, tintColor }) => (
     <TabBarIcon
-      focused={focused}
       name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      color={tintColor}
     />
   ),
+    tabBarOptions: {style: {backgroundColor: '#00609c'},
+        showLabel: false,
+        activeTintColor: '#F8F8F8',
+        inactiveTintColor: '#f8ffa5'},
 };
 
 const SettingsStack = createStackNavigator({
@@ -56,34 +71,42 @@ const SettingsStack = createStackNavigator({
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Slack',
-  tabBarIcon: ({ focused }) => (
+    tabBarIcon: ({ focused, tintColor }) => (
     <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === 'ios' ? 'ios-chatbubbles' : 'md-chatbubbles'}
+      color={tintColor}
     />
   ),
+    tabBarOptions: {style: {backgroundColor: '#00609c'},
+        showLabel: false,
+        activeTintColor: '#F8F8F8',
+        inactiveTintColor: '#f8ffa5'},
 };
 
-const RoutesStack = createStackNavigator({
-  Routes: RoutesScreen,
+const PoolStack = createStackNavigator({
+  Pools: PoolsScreen,
 });
 
-RoutesStack.navigationOptions = {
+PoolStack.navigationOptions = {
   tabBarLabel: 'Pools',
-  tabBarIcon: ({ focused }) => (
+    tabBarOptions: {style: {backgroundColor: '#00609c'},
+        tintColor: '#f8ffa5',
+        showLabel: false,
+        activeTintColor: '#F8F8F8',
+        inactiveTintColor: '#f8ffa5'},
+    tabBarIcon: ({ focused, tintColor }) => (
       <TabBarIcon
-          focused={focused}
           name={Platform.OS === 'ios' ? 'ios-options' : 'md-car'}
+          color={tintColor}
       />
   ),
+
 };
-
-
 
 
 export default createBottomTabNavigator({
   HomeStack,
-  RoutesStack,
+  PoolStack,
   LinksStack,
   SettingsStack,
     MapStack

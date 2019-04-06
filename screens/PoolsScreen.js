@@ -2,13 +2,13 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PoolSelect from '../components/PoolSelect';
 
-export default class RoutesScreen extends React.Component {
+export default class PoolsScreen extends React.Component {
     state = {
         hasPools: true
-    }
+    };
     
     static navigationOptions = {
-        title: 'Your Pools',
+        title: 'Pools',
         headerStyle: {backgroundColor: '#00609c'},
         headerTitleStyle: {color: '#f8ffa5'},
     };
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 15,
-        backgroundColor: '#93aaac',
+        backgroundColor: '#c7e7f1',
     },
     labelText: {
         fontSize: 25,
