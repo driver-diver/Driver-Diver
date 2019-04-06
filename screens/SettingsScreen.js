@@ -25,7 +25,7 @@ export default class SettingsScreen extends React.Component {
   _handleHelpPress2 = () => {
     WebBrowser.openBrowserAsync(
         'https://SonomaTech.slack.com/'
-    )
+    );
   };
   
   render() {
