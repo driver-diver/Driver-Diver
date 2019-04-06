@@ -29,20 +29,11 @@ MapStack.navigationOptions = {
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  Links: LinksScreen
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+  tabBarLabel: 'Driver Diver'
 };
 
 const LinksStack = createStackNavigator({
@@ -64,7 +55,7 @@ const SettingsStack = createStackNavigator({
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: 'Slack',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -95,5 +86,5 @@ export default createBottomTabNavigator({
   RoutesStack,
   LinksStack,
   SettingsStack,
-    MapStack,
+    MapStack
 });

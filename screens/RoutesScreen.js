@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import PoolSelect from '../components/PoolSelect';
 
 export default class RoutesScreen extends React.Component {
+    state = {
+        hasPools: true
+    }
+    
     static navigationOptions = {
         title: 'Your Pools',
         headerStyle: {backgroundColor: '#00609c'},
@@ -11,12 +16,17 @@ export default class RoutesScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.labelText}>
-                    You don't have any pools!
-                </Text>
-                <Text style={styles.infoText}>
-                    To add some pools, click on the add tab below.
-                </Text>
+            {this.state.hasPools ? 
+                <PoolSelect /> :
+                <View>
+                    <Text style={styles.labelText}>
+                        You don't have any pools!
+                    </Text>
+                    <Text style={styles.infoText}>
+                        To add some pools, click on the add tab below.
+                    </Text>
+                </View>
+            }
             </View>
         );
     }
