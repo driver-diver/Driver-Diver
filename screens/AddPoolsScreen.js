@@ -7,6 +7,19 @@ import {
     ScrollView,
     TextInput
 } from "react-native";
+import * as firebase from 'firebase';
+
+function add() {
+    firebase.database().ref('/carpools/').push({
+        userID: this.state.userID,
+        'yourName': this.state.yourName,
+        'poolName': this.state.poolName,
+        'latitude': this.state.latitude,
+        'longitude': this.state.longitude,
+        'departureTime': this.state.departureTime,
+        'slackChannel': this.state.slackChannel,
+    })
+}
 
 export default class AddPoolsScreen extends React.Component {
     static navigationOptions = {
@@ -23,7 +36,9 @@ export default class AddPoolsScreen extends React.Component {
                         latitude: '',
                         longitude: '',
                         departureTime: '',
-                        slackChannel: ''};
+                        slackChannel: '',
+                        userID: this.props.navigation.state.params.userID,
+                        };
 
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handlePoolChange = this.handlePoolChange.bind(this);
@@ -60,9 +75,16 @@ export default class AddPoolsScreen extends React.Component {
 
     handleSubmit() {
         return(
-            <Text>
-                You saved things
-            </Text>
+            firebase.database().ref('/carpools/').push({
+                'userID': this.state.userID,
+                'yourName': this.state.yourName,
+                'poolName': this.state.poolName,
+                'latitude': this.state.latitude,
+                'longitude': this.state.longitude,
+                'departureTime': this.state.departureTime,
+                'slackChannel': this.state.slackChannel,
+            })
+
         )
     };
 
