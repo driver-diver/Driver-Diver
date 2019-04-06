@@ -8,6 +8,15 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import RoutesScreen from '../screens/RoutesScreen';
 import MapScreen from '../screens/MapScreen';
+import SignInScreen from '../screens/SignInScreen';
+
+const SignInStack = createStackNavigator({
+    SignIn: SignInScreen,
+});
+
+SignInStack.navigationOptions = {
+    tabBarLabel: 'SignIn',
+};
 
 const MapStack = createStackNavigator({
     Maps: MapScreen,
@@ -29,7 +38,7 @@ MapStack.navigationOptions = {
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Links: LinksScreen
+  SignIn: SignInScreen
 });
 
 HomeStack.navigationOptions = {
