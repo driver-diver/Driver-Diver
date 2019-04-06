@@ -29,7 +29,7 @@ class PoolSelect extends React.Component {
         const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
-                <Text style={styles.poolTitle}>Select your pool</Text>
+                <Text style={styles.poolTitle}>Where are you going?</Text>
                 {this.state.poolList.map((item) => {
                     return(
                         <TouchableOpacity key={item.id} onPress={() => navigate('Maps', {latitude: item.latitude, longitude: item.longitude})} style={styles.item}>
@@ -47,14 +47,13 @@ export default PoolSelect;
 const styles = StyleSheet.create({ 
     container: {
       flex: 1,
-      justifyContent: "center",
       alignItems: "center"
     },
     item: {
         marginBottom: 10,
     },
     poolTitle: {
-        fontSize: 20,
+        fontSize: 35,
         marginBottom: 10,
     }
   });

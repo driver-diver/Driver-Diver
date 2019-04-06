@@ -137,7 +137,7 @@ AddPoolStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-    Home: { screen: HomeStack, navigationOptions:{tabBarVisible: false} },
+    Home: { screen: HomeStack, navigationOptions:{tabBarVisible: false}, Visible: false },
   RoutesStack,
   AddPoolStack,
   SettingsStack,
