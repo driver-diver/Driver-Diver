@@ -8,6 +8,25 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import RoutesScreen from '../screens/RoutesScreen';
 import MapScreen from '../screens/MapScreen';
+import SignInScreen from '../screens/SignInScreen';
+
+const SignInStack = createStackNavigator({
+    Routes: SignInScreen,
+});
+
+SignInStack.navigationOptions = {
+    tabBarLabel: 'SignIn',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={
+                Platform.OS === 'ios'
+                    ? `ios-information-circle${focused ? '' : '-outline'}`
+                    : 'md-information-circle'
+            }
+        />
+    ),
+};
 
 const MapStack = createStackNavigator({
     Maps: MapScreen,
@@ -29,7 +48,7 @@ MapStack.navigationOptions = {
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
-  Links: LinksScreen
+  Links: SignInScreen
 });
 
 HomeStack.navigationOptions = {
@@ -86,5 +105,6 @@ export default createBottomTabNavigator({
   RoutesStack,
   LinksStack,
   SettingsStack,
-    MapStack
+    MapStack,
+    SignInStack
 });
