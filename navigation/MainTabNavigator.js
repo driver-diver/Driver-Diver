@@ -55,7 +55,7 @@ const SettingsStack = createStackNavigator({
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: 'Slack',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
