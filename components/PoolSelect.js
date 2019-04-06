@@ -32,7 +32,7 @@ class PoolSelect extends React.Component {
                 <Text style={styles.poolTitle}>Select your pool</Text>
                 {this.state.poolList.map((item) => {
                     return(
-                        <TouchableOpacity key={item.id} onPress={() => navigate('Maps')} style={styles.item}>
+                        <TouchableOpacity key={item.id} onPress={() => navigate('Maps', {latitude: 51.503457, longitude: -0.112777})} style={styles.item}>
                             <Text>{item.name}</Text>
                         </TouchableOpacity>
                     );

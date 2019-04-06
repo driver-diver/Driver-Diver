@@ -8,12 +8,9 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            region: {
-                latitude: 0,
-                longitude: 0
-            },
+            latitude: 0,
+            longitude: 0,
             errorMessage: null,
-
         };
     }
 
@@ -39,6 +36,9 @@ export default class App extends React.Component {
         } else {
             this._getLocationAsync();
         }
+        const { navigation  } = this.props;
+        this.setState({latitude: navigation.getParam('latitude', 37.78825),
+                       longitude: navigation.getParam('longitude', -122.4324)});
     }
 
 
@@ -64,17 +64,15 @@ export default class App extends React.Component {
             <MapView
                 style={{ flex: 1 }}
                 initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
+                    latitude: this.state.latitude,
+                    longitude: this.state.longitude,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
                 showsUserLocation={true}
                 region={{
-                    //latitude: this.state.region.coords.latitude,
-                    //longitude: this.state.region.coords.longitude,
-                    latitude: 38.3386,
-                    longitude: -122.6748,
+                    latitude: this.state.latitude,
+                    longitude: this.state.longitude,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
