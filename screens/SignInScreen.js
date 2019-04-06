@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StatusBar, TextInput, View, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
-import * as firebase from 'firebase';
+/*import * as firebase from 'firebase';
 
 // Initialize Firebase
 var config = {
@@ -12,7 +12,7 @@ var config = {
     storageBucket: "driver-diver.appspot.com",
     messagingSenderId: "954443209968"
 };
-firebase.initializeApp(config);
+firebase.initializeApp(config);*/
 
 /*
 firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {

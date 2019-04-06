@@ -100,7 +100,7 @@ const RoutesStack = createStackNavigator({
   Maps: MapScreen,
 });
 
-PoolStack.navigationOptions = {
+RoutesStack.navigationOptions = {
   tabBarLabel: 'Pools',
     tabBarOptions: {style: {backgroundColor: '#00609c'},
         tintColor: '#f8ffa5',
@@ -138,10 +138,7 @@ AddPoolStack.navigationOptions = {
 
 export default createBottomTabNavigator({
     Home: { screen: HomeStack, navigationOptions:{tabBarVisible: false} },
-  PoolStack,
-  AddPoolStack,
   RoutesStack,
-  LinksStack,
+  AddPoolStack,
   SettingsStack,
-    MapStack
 });
