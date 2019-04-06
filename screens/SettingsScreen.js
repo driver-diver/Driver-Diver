@@ -14,7 +14,7 @@ export default class SettingsScreen extends React.Component {
 
   _handleHelpPress = () => {
     WebBrowser.openBrowserAsync(
-      'slack://open'
+      'https://slack://open'
     );
   };
   
