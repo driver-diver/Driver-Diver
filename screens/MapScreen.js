@@ -3,6 +3,11 @@ import { Platform, Text, View, StyleSheet } from 'react-native';
 import { Constants, Location, Permissions, MapView } from 'expo';
 
 export default class App extends React.Component {
+    static navigationOptions = {
+        title: 'Pools Near You',
+        headerStyle: {backgroundColor: '#00609c'},
+        headerTitleStyle: {color: '#f8ffa5'},
+    };
 
 
     constructor(props) {
@@ -69,7 +74,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: '#ecf0f1',
+        backgroundColor: '#c7e7f1',
+
     },
     paragraph: {
         margin: 24,

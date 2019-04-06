@@ -9,7 +9,9 @@ import { WebBrowser } from 'expo';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
-    title: 'app.json',
+    title: 'Slack Channels',
+    headerStyle: {backgroundColor: '#00609c'},
+    headerTitleStyle: {color: '#f8ffa5'},
   };
 
   _handleHelpPress = () => {
@@ -35,7 +37,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: '#c7e7f1'
   },
   buttonText: {
     fontSize: 40,
