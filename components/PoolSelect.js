@@ -22,16 +22,17 @@ class PoolSelect extends React.Component {
     }
     
     onItemSelect() {
-        /*Build this out*/
+        navigate('Maps');
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Text style={styles.poolTitle}>Select your pool</Text>
                 {this.state.poolList.map((item) => {
                     return(
-                        <TouchableOpacity key={item.id} onPress={this.onItemSelect} style={styles.item}>
+                        <TouchableOpacity key={item.id} onPress={() => navigate('Maps')} style={styles.item}>
                             <Text>{item.name}</Text>
                         </TouchableOpacity>
                     );
