@@ -5,10 +5,10 @@ import PoolSelect from '../components/PoolSelect';
 export default class RoutesScreen extends React.Component {
     state = {
         hasPools: true
-    }
+    };
     
     static navigationOptions = {
-        title: 'Your Pools',
+        title: 'Pools',
         headerStyle: {backgroundColor: '#00609c'},
         headerTitleStyle: {color: '#f8ffa5'},
     };
@@ -17,7 +17,7 @@ export default class RoutesScreen extends React.Component {
         return (
             <View style={styles.container}>
             {this.state.hasPools ? 
-                <PoolSelect /> :
+                <PoolSelect navigation={this.props.navigation} /> :
                 <View>
                     <Text style={styles.labelText}>
                         You don't have any pools!
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 15,
-        backgroundColor: '#93aaac',
+        backgroundColor: '#c7e7f1',
     },
     labelText: {
         fontSize: 25,

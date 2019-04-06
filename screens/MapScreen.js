@@ -3,17 +3,19 @@ import { Platform, Text, View, StyleSheet } from 'react-native';
 import { Constants, Location, Permissions, MapView } from 'expo';
 
 export default class App extends React.Component {
+    static navigationOptions = {
+        title: 'Pools Near You',
+        headerStyle: {backgroundColor: '#00609c'},
+        headerTitleStyle: {color: '#f8ffa5'},
+    };
 
 
     constructor(props) {
         super(props);
         this.state = {
-            region: {
-                latitude: 0,
-                longitude: 0
-            },
+            latitude: 0,
+            longitude: 0,
             errorMessage: null,
-
         };
     }
 
@@ -27,7 +29,6 @@ export default class App extends React.Component {
 
         let location = await Location.getCurrentPositionAsync({});
         console.log(location);
-        //this.setState({ region: {latitude: location.coords.latitude, longitude: longitude.coords.longitude} });
         this.setState({ location });
     };
 
@@ -39,42 +40,25 @@ export default class App extends React.Component {
         } else {
             this._getLocationAsync();
         }
+        const { navigation  } = this.props;
+        this.setState({latitude: navigation.getParam('latitude', 37.78825),
+                       longitude: navigation.getParam('longitude', -122.4324)});
     }
-
-
-    /*
-    render() {
-        let text = 'Waiting..';
-        if (this.state.errorMessage) {
-            text = this.state.errorMessage;
-        } else if (this.state.location) {
-            text = JSON.stringify(this.state.location);
-        }
-
-        return (
-            <View style={styles.container}>
-                <Text style={styles.paragraph}>{text}</Text>
-            </View>
-        );
-    }
-    */
 
     render() {
         return (
             <MapView
                 style={{ flex: 1 }}
                 initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
+                    latitude: this.state.latitude,
+                    longitude: this.state.longitude,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
                 showsUserLocation={true}
                 region={{
-                    //latitude: this.state.region.coords.latitude,
-                    //longitude: this.state.region.coords.longitude,
-                    latitude: 38.3386,
-                    longitude: -122.6748,
+                    latitude: this.state.latitude,
+                    longitude: this.state.longitude,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421,
                 }}
@@ -90,7 +74,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: '#ecf0f1',
+        backgroundColor: '#c7e7f1',
+
     },
     paragraph: {
         margin: 24,
