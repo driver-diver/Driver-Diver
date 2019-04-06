@@ -6,23 +6,34 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import RoutesScreen from '../screens/RoutesScreen';
+import MapScreen from '../screens/MapScreen';
+
+const MapStack = createStackNavigator({
+    Maps: MapScreen,
+});
+
+MapStack.navigationOptions = {
+    tabBarLabel: 'Maps',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={
+                Platform.OS === 'ios'
+                    ? `ios-information-circle${focused ? '' : '-outline'}`
+                    : 'md-information-circle'
+            }
+        />
+    ),
+};
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  Links: LinksScreen
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+  tabBarLabel: 'Driver Diver'
 };
 
 const LinksStack = createStackNavigator({
@@ -53,8 +64,27 @@ SettingsStack.navigationOptions = {
   ),
 };
 
+const RoutesStack = createStackNavigator({
+  Routes: RoutesScreen,
+});
+
+RoutesStack.navigationOptions = {
+  tabBarLabel: 'Pools',
+  tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+          focused={focused}
+          name={Platform.OS === 'ios' ? 'ios-options' : 'md-car'}
+      />
+  ),
+};
+
+
+
+
 export default createBottomTabNavigator({
   HomeStack,
+  RoutesStack,
   LinksStack,
   SettingsStack,
+    MapStack
 });
