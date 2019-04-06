@@ -8,6 +8,7 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import PoolsScreen from '../screens/PoolsScreen';
 import MapScreen from '../screens/MapScreen';
+import AddPoolsScreen from '../screens/AddPoolsScreen';
 
 const MapStack = createStackNavigator({
     Maps: MapScreen,
@@ -96,18 +97,37 @@ PoolStack.navigationOptions = {
         inactiveTintColor: '#f8ffa5'},
     tabBarIcon: ({ focused, tintColor }) => (
       <TabBarIcon
-          name={Platform.OS === 'ios' ? 'ios-options' : 'md-car'}
+          name={Platform.OS === 'ios' ? 'ios-car' : 'md-car'}
           color={tintColor}
       />
   ),
 
 };
 
+const AddPoolStack = createStackNavigator({
+    AddPools: AddPoolsScreen,
+});
+
+AddPoolStack.navigationOptions = {
+    tabBarLabel: 'Pools',
+    tabBarOptions: {style: {backgroundColor: '#00609c'},
+        tintColor: '#f8ffa5',
+        showLabel: false,
+        activeTintColor: '#F8F8F8',
+        inactiveTintColor: '#f8ffa5'},
+    tabBarIcon: ({ focused, tintColor }) => (
+        <TabBarIcon
+            name={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}
+            color={tintColor}
+        />
+    ),
+
+};
 
 export default createBottomTabNavigator({
   HomeStack,
   PoolStack,
-  LinksStack,
+  AddPoolStack,
   SettingsStack,
     MapStack
 });
