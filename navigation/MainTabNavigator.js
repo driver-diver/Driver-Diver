@@ -6,7 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import PoolsScreen from '../screens/PoolsScreen';
+import RoutesScreen from '../screens/RoutesScreen';
 import MapScreen from '../screens/MapScreen';
 import AddPoolsScreen from '../screens/AddPoolsScreen';
 
@@ -85,7 +85,7 @@ SettingsStack.navigationOptions = {
 };
 
 const PoolStack = createStackNavigator({
-  Pools: PoolsScreen,
+  Pools: RoutesScreen,
 });
 
 PoolStack.navigationOptions = {

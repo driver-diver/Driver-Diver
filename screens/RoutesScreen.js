@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PoolSelect from '../components/PoolSelect';
 
-export default class PoolsScreen extends React.Component {
+export default class RoutesScreen extends React.Component {
     state = {
         hasPools: true
     };
