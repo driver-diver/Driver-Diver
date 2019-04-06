@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, StatusBar, TextInput, View, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
-/*import * as firebase from 'firebase';
+import * as firebase from 'firebase';
 
 // Initialize Firebase
 var config = {
@@ -12,15 +12,10 @@ var config = {
     storageBucket: "driver-diver.appspot.com",
     messagingSenderId: "954443209968"
 };
-firebase.initializeApp(config);*/
+firebase.initializeApp(config);
+
 
 /*
-firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // ...
-});
 
 firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
     // Handle Errors here.
@@ -29,11 +24,18 @@ firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error
     // ...
 });
 */
+
 export default class App extends Component {
-    state = {
-        email: '',
-        password: '',
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            userID: "",
+            email: '',
+            password: '',
+        };
+
+    }
+
 
     render() {
         return (
@@ -41,16 +43,13 @@ export default class App extends Component {
                 <StatusBar barStyle="light-content" />
                 <View style={styles.header}>
                     <Text style={styles.description}>
-                        This demo shows how using available TextInput customizations can make
-                        forms much easier to use. Try completing the form and notice that different
-                        fields have specific optimizations and the return key changes from focusing
-                        next input to submitting the form.
+
                     </Text>
                 </View>
                 <TextInput
                     style={styles.input}
                     value={this.state.email}
-                    onChangeText={email => this.setState({email})}
+                    onChangeText={x => this.setState({email: x})}
                     ref={ref => {this._emailInput = ref}}
                     placeholder="email@example.com"
                     autoFocus={true}
@@ -64,7 +63,7 @@ export default class App extends Component {
                 <TextInput
                     style={styles.input}
                     value={this.state.password}
-                    onChangeText={password => this.setState({password})}
+                    onChangeText={x => this.setState({password: x})}
                     ref={ref => {this._passwordInput = ref}}
                     placeholder="Password"
                     autoCapitalize="none"
@@ -83,9 +82,22 @@ export default class App extends Component {
     };
 
     _submit = () => {
+        var temp = firebase.database().ref('users/').push({
+            'email' : this.state.email,
+            'password' : this.state.password,
+        });
+        // Handle Errors here.
+        /*
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        */
+        // ...
+        var temp2 = temp.key
+        console.log(temp2);
+        this.setState({userID: temp2})
         alert(`Welcome! Confirmation email has been sent to ${this.state.email}`);
-        const { navigate } = this.props.navigation;
-        navigate('Routes');
+        console.log(this.state.userID);
+        this.props.navigation.navigate('AddPools', {userID: this.state.userID});
     };
 }
 
