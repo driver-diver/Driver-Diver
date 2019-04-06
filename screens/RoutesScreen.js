@@ -17,7 +17,7 @@ export default class RoutesScreen extends React.Component {
         return (
             <View style={styles.container}>
             {this.state.hasPools ? 
-                <PoolSelect /> :
+                <PoolSelect navigation={this.props.navigation} /> :
                 <View>
                     <Text style={styles.labelText}>
                         You don't have any pools!

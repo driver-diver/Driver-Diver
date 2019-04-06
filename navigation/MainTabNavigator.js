@@ -76,6 +76,7 @@ SettingsStack.navigationOptions = {
 
 const RoutesStack = createStackNavigator({
   Routes: RoutesScreen,
+  Maps: MapScreen,
 });
 
 RoutesStack.navigationOptions = {
