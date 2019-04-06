@@ -24,7 +24,6 @@ export default class App extends React.Component {
 
         let location = await Location.getCurrentPositionAsync({});
         console.log(location);
-        //this.setState({ region: {latitude: location.coords.latitude, longitude: longitude.coords.longitude} });
         this.setState({ location });
     };
 
@@ -40,24 +39,6 @@ export default class App extends React.Component {
         this.setState({latitude: navigation.getParam('latitude', 37.78825),
                        longitude: navigation.getParam('longitude', -122.4324)});
     }
-
-
-    /*
-    render() {
-        let text = 'Waiting..';
-        if (this.state.errorMessage) {
-            text = this.state.errorMessage;
-        } else if (this.state.location) {
-            text = JSON.stringify(this.state.location);
-        }
-
-        return (
-            <View style={styles.container}>
-                <Text style={styles.paragraph}>{text}</Text>
-            </View>
-        );
-    }
-    */
 
     render() {
         return (
